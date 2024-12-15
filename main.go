@@ -45,7 +45,7 @@ var versionCmd = &cobra.Command{
     Short: "Print version for certchecker",
     Long:  `Print version for certchecker.`,
     Run: func(cmd *cobra.Command, args []string) {
-        const appVersion = "0.1.0"
+        const appVersion = "1.0.0"
         fmt.Printf("certmon v%s", appVersion)
     },
 }
