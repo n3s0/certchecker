@@ -43,6 +43,33 @@ sudo mv ./certchecker /usr/local/bin
 Applciation can be run by issuing the command with a target host. Not URL. The
 application will take care of the url portion for you for now.
 
+### help
+
+Here is the help to provide an overview of the usage for this applciation.
+
+```sh   
+Check that TLS certificates are valid.
+
+Usage:
+  certchecker [flags]
+  certchecker [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  version     Print version for certchecker
+
+Flags:
+  -h, --help            help for certchecker
+  -s, --server string   hostname for site being tested (i.g. www.n3s0.tech)
+
+Use "certchecker [command] --help" for more information about a command.
+```
+
+### Example
+
+Below is an example of how it can be used and what information it can provide.
+
 ```sh
 certchecker -s www.n3s0.tech
 ```
