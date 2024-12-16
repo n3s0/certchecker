@@ -23,16 +23,26 @@ type CertInfo struct {
 
 var certInfo CertInfo
 var host string
+var port string
 
 var rootCmd = &cobra.Command{
     Use:   "certchecker",
     Short: "Cert Checker checks that TLS certificates are valid.",
     Long: `Check that TLS certificates are valid.`,
     Run: func(cmd *cobra.Command, args []string) {
-        if host != "" {
-            err := getTlsInfo(host)
+        if host != "" && port == "" {
+            err := getTlsInfo(host, "")
             if err != nil {
                 fmt.Println(err)
+                os.Exit(1)
+            }
+
+            certInfo.generateTlsInfoList()
+        } else if host != "" && port != "" {
+            err := getTlsInfo(host, port)
+            if err != nil {
+                fmt.Println(err)
+                os.Exit(1)
             }
 
             certInfo.generateTlsInfoList()
@@ -65,11 +75,25 @@ func init() {
     rootCmd.AddCommand(versionCmd)
 
     rootCmd.Flags().StringVarP(&host, "server", "s", "", "hostname for site being tested (i.g. www.n3s0.tech)")
+    rootCmd.Flags().StringVarP(&port, "port", "p", "", "port for site being tested, needs to be run with --server")
 }
 
-func getTlsInfo(host string) (e error) {
+func getTlsInfo(host, port string) (e error) {
+    var url string
 
-    resp, err := http.Get("https://" + host)
+    if port != "" {
+        url = fmt.Sprintf("https://%s:%s", host, port)
+    } else {
+        url = fmt.Sprintf("https://%s", host)
+    }
+
+    tr := &http.Transport{
+        TLSClientConfig: &tls.Config{InsecureSkipVerify : true},
+    }
+
+    client := &http.Client{Transport: tr}
+
+    resp, err := client.Get(url)
 	if err != nil {
 		fmt.Println("Error making request:", err)
 		return
