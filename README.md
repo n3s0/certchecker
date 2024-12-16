@@ -91,3 +91,10 @@ The output for this command can be found below.
 ╰─ Client Information:
    ╰─ Local Date/Time: Sun, 15 Dec 2024 03:36:48 CST
 ```
+
+Another option available is to issue this for a specific port. Which can be
+useful when the standard HTTPS port isn't being used.
+
+```sh
+certcecker -s example.com -p 65443
+```
