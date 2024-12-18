@@ -14,6 +14,25 @@ outside of standard monitoring platforms or just to provide output that's
 simple. Plus, it's been a desired project of mine for learning Go and to see
 where Go can be used.
 
+## Roadmap
+
+At the moment this application provides simple information back about the expiry
+of a TLS certificate. But, down the road I intend on the following. Just some
+next steps until the next release tag.
+
+1. Pulling more data from the certificate for the site.
+2. Using a configuration file to have a daemonized process that will pull this
+   data from multiple sites.
+3. Reports sent via email, sms, or chat integrations.
+4. The ability to separate entities and report to them with data that only
+   concerns their infrastructure.
+5. Potential sponsorship to manage it in various package repositories of
+   different Linux distros.
+6. Ability to send the data concerning a TLS certificate to a database.
+
+This is just a simple writeup for next steps related to this project. Please let
+me know if anyone wants features not listed above.
+
 ## Build
 
 The current build will be undergoing a refactoring at some point.
